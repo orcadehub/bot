@@ -63,15 +63,15 @@ const setWebhook = async () => {
   }
 };
 
+// Attach webhook route to Express
 const attachWebhookRoutes = (app) => {
   app.post("/webhook", (req, res) => {
-    try {
-      bot.handleUpdate(req.body);
-      res.sendStatus(200);
-    } catch (error) {
-      console.error("Error processing update:", error);
-      res.sendStatus(500);
-    }
+    bot.handleUpdate(req.body)
+      .then(() => res.sendStatus(200))
+      .catch((err) => {
+        console.error("Error processing update:", err);
+        res.sendStatus(500);
+      });
   });
 
   if (process.env.NODE_ENV === "production") {
