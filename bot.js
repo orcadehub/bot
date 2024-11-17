@@ -14,8 +14,7 @@ app.use(express.json());
 
 mongoose
   .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 15000,
   })
   .then(() => console.log("Bot connected to MongoDB"))
   .catch((err) => console.error("Error connecting to MongoDB:", err));
