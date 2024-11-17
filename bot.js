@@ -23,6 +23,9 @@ mongoose
 // Attach webhook routes
 attachWebhookRoutes(app);
 
+app.get("/", (req,res)=> {
+    res.send("bot server");
+});
 // Start the bot server
 app.listen(PORT, () => {
   console.log(`Bot server is running on port ${PORT}`);
